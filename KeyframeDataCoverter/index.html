@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Keyframe Data Converter</title>
+        <style type="text/css">
+            * {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+            div {
+                position: absolute;
+                left: 8px;
+                right: 8px;
+                top: 8px;
+                bottom: 40px;
+            }
+            textarea {
+                display: block;
+                position: absolute;
+                width: 49%;
+                height: 100%;
+                font-family: monospace;
+            }
+            input {
+                position: absolute;
+                bottom: 8px;
+                font-size: 20px;
+            }
+            #txt { left: 0; }
+            #json { right: 0; }
+        </style>
+    </head>
+
+    <body>
+
+        <div>
+            <textarea id="txt" type="text"></textarea>
+            <textarea id="json" type="text"></textarea>
+        </div>
+
+        <input id="submit" type="submit" value="Convert" />
+
+        <script>
+
+            var line = 0;
+            var d = document;
+            var result = { trackers: [], frames: {} };
+
+            d.getElementById("submit").addEventListener("click", function(e) {
+                parse(d.getElementById("txt").value.split(/\r\n|\r|\n/));
+                e.preventDefault();
+            });
+
+            function parse(txt) {
+                var res;
+                var reHeadline = /^(Motion Trackers)\t([\w\s]+#[0-9]+)\t([\w\s]+#[0-9]+)\t([A-Za-z ]+)$/;
+                while ((!(res = reHeadline.exec(txt[line])) || res.length < 5) && line < txt.length) {
+                    line++;
+                }
+                if (res && res.length == 5) {
+                    line++;
+                    result.trackers.push({
+                        name: res[2],
+                        point: res[3],
+                        property: res[4]
+                    });
+                    parseData(txt);
+                } else {
+                    // Done
+                    d.getElementById("json").value = JSON.stringify(result);
+                }
+            }
+
+            function parseData(txt) {
+                var res;
+                var reProperty = /^\t([0-9]+)\t([0-9\.]+)\t([0-9\.]+)$/;
+                while (++line < txt.length && (res = reProperty.exec(txt[line])) && res.length == 4) {
+                    var frame = result.frames[res[1]] || [];
+                    frame.push({
+                        i: result.trackers.length - 1,
+                        x: parseFloat(res[2]),
+                        y: parseFloat(res[3]),
+                    });
+                    result.frames[res[1]] = frame;
+                }
+                parse(txt);
+            }
+
+        </script>
+
+    </body>
+</html>

@@ -1,4 +1,8 @@
-experiment_MotionTracker
-========================
+## Simple Motion Tracking experiment
 
-A simple (and dead-ended) HTML5 video motion tracking experiment
+### Browser support
+
+	* Chrome: ok
+	* Firefox: ok
+	* Safari: not ok (context.drawImage extremely slow when source is video)
+	* Mobile Safari iPad: not ok (context.drawImage does not work when source is video)
