@@ -3,22 +3,26 @@ var trackerData = {
 		{
 			"name": "Tracker #1",
 			"point": "Track Point #1",
-			"property": "Attach Point"
+			"property": "Attach Point",
+			"dy": -48
 		},
 		{
 			"name": "Tracker #2",
 			"point": "Track Point #1",
-			"property": "Attach Point"
+			"property": "Attach Point",
+			"dy": -57
 		},
 		{
 			"name": "Tracker #3",
 			"point": "Track Point #1",
-			"property": "Attach Point"
+			"property": "Attach Point",
+			"dy": -64
 		},
 		{
 			"name": "Tracker #4",
 			"point": "Track Point #1",
-			"property": "Attach Point"
+			"property": "Attach Point",
+			"dy": -65
 		}
 	],
 	"frames": {
