@@ -1,0 +1,14 @@
+#video_container.masked {
+	position: relative;
+	overflow: hidden;
+	height: 720px;
+}
+#canvas, #video {
+	position: absolute;
+	top: 0;
+	width: 1072px;
+	height: 728px;
+}
+#video {
+	display: none;
+}
