@@ -7,6 +7,16 @@
 	var ctxFrameData;
 	var frameBits;
 	var frameBitsWidth = 0;
+	var paused = false;
+
+	canvas.addEventListener('click', function() {
+		if (paused) {
+			video.play();
+		} else {
+			video.pause();
+		}
+		paused = !paused;
+	});
 
 	video.addEventListener('canplay', function() {
 		// Set up event handlers
