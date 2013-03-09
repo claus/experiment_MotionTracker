@@ -477,6 +477,12 @@ Motion Trackers	Tracker #1	Track Point #1	Attach Point
 
 Motion Trackers	Tracker #2	Track Point #1	Attach Point
 	Frame	X pixels	Y pixels
+	87	20.2542	175.662
+	88	22.7748	185.662
+	89	30.4583	199.174
+	90	37.8373	201.514
+	91	49.0638	208.178
+	92	54.9037	202.334
 	93	65.431	207.545
 	94	71.4037	214.377
 	95	78.0951	209.733
