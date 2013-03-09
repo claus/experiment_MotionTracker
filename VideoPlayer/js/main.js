@@ -65,7 +65,7 @@
 		// Decode frame number
 		var frame = 0;
 		for (var i = 0; i < frameBits.length; i++) {
-			if (pixeldata[frameBits[i].x] > 128) {
+			if (pixeldata[frameBits[i].i] > 128) {
 				frame |= frameBits[i].b;
 			}
 		}
@@ -77,18 +77,17 @@
 		and create off-DOM canvas for reading frame number
 	*/
 	function initialize() {
+		var pixeldata = ctx.getImageData(0, canvas.height - 4, canvas.width, 1).data;
+		var i = (canvas.width - 4) * 4;
 		var bit = 1;
-		var x = (canvas.width - 4) * 4;
-		var y = canvas.height - 4;
-		var pixeldata = ctx.getImageData(0, y, canvas.width, 1).data;
 		frameBits = [];
 		frameBitsWidth = 0;
-		while (pixeldata[x] > 128 ||  pixeldata[x + 1] > 128) {
+		while (pixeldata[i] > 128 ||  pixeldata[i + 1] > 128) {
 			frameBitsWidth += 8;
-			x -= 32;
+			i -= 32;
 		}
-		for (var i = frameBitsWidth / 8; i > 0; i--) {
-			frameBits.push({ x: (i * 8 - 4) * 4 + 1, b: bit });
+		for (var j = frameBitsWidth / 8; j > 0; j--) {
+			frameBits.push({ i: (j * 8 - 4) * 4 + 1, b: bit });
 			bit <<= 1;
 		}
 		// Create off-DOM canvas for reading frame number
