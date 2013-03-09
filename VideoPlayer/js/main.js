@@ -17,7 +17,6 @@
 	}, false);
 
 	function videoPlay() {
-		clearInterval(interval);
 		interval = setInterval(videoInterval, 1000 / 60);
 	}
 
@@ -27,15 +26,15 @@
 
 	function videoInterval() {
 		ctx.drawImage(video, 0, 0);
-		ctx.fillStyle = "#ff0000";
 		if (frameBitsWidth == 0) {
 			calcFrameBitsMeta();
-		}
-		var frame = getFrameNumber();
-		var points = trackerData.frames[frame];
-		if (points) {
-			for (var i = 0; i < points.length; i++) {
-				ctx.fillRect(points[i].x - 10, points[i].y - 10, 20, 20);
+		} else {
+			var points = trackerData.frames[getFrameNumber()];
+			if (points) {
+				ctx.fillStyle = "#ff0000";
+				for (var i = 0; i < points.length; i++) {
+					ctx.fillRect(points[i].x - 10, points[i].y - 10, 20, 20);
+				}
 			}
 		}
 	}

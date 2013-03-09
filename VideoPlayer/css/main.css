@@ -10,5 +10,5 @@
 	height: 728px;
 }
 #video {
-	display: none;
+	left: -9999px;
 }
