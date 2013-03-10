@@ -40,6 +40,9 @@
 		frameDataCanvas.width = videoWidth;
 		frameDataCanvas.height = 1;
 		ctxFrameData = frameDataCanvas.getContext("2d");
+		// Scale video to fullscreen
+		window.addEventListener("resize", function() { resize(); });
+		resize();
 	}
 
 	function onVideoPlaying() {
@@ -142,6 +145,46 @@
 			video.appendChild(source);
 		}
 		return video;
+	}
+
+	function resize() {
+		var w = 0;
+		var h = 0;
+		if (!window.innerWidth) {
+			if (!(document.documentElement.clientWidth == 0)) {
+				w = document.documentElement.clientWidth;
+				h = document.documentElement.clientHeight;
+			} else {
+				w = document.body.clientWidth;
+				h = document.body.clientHeight;
+			}
+		} else {
+			w = window.innerWidth;
+			h = window.innerHeight;
+		}
+
+		var cw = w;
+		var ch = h;
+		var aspect = videoWidth / (videoHeight - 8);
+		if (w / h > aspect) {
+			ch = cw / aspect;
+		} else {
+			cw = ch * aspect;
+		}
+
+		var scale = cw / videoWidth;
+		var dx = Math.round((w - cw) / 2);
+		var dy = Math.round((h - ch) / 2);
+		var translateXForm = "translate(" + dx + "px," + dy + "px)";
+		var scaleXForm = "scale(" + scale + "," + scale + ")";
+		var transform = translateXForm + " " + scaleXForm;
+		var style =
+			"-webkit-transform:" + transform + ";" +
+			"-moz-transform:" + transform + ";" +
+			"-ms-transform:" + transform + ";" +
+			"-o-transform:" + transform + ";" +
+			"transform:" + transform;
+		canvas.setAttribute("style", style);
 	}
 
 })();
