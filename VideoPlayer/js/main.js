@@ -12,7 +12,7 @@
 	var paused = false;
 	var interval;
 
-	video = createVideoElement("video/hotrod", [ "mp4", "webm" ]);
+	video = createVideoElement("video/refCam", [ "mp4", "webm" ]);
 	video.addEventListener('canplay', onVideoReady, false);
 	video.addEventListener('playing', onVideoPlaying, false);
 	video.addEventListener('pause', onVideoPause, false);
