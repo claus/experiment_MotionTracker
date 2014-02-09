@@ -70,18 +70,20 @@
 			var points = trackerData.frames[getFrameNumber()];
 			if (points) {
 				// Draw trackers according to data from AE
-				ctx.fillStyle = "rgba(63, 255, 0, 0.9)";
+				ctx.fillStyle = "rgba(63, 255, 0, 0.6)";
 				for (var i = 0; i < points.length; i++) {
 					ctx.save();
 					ctx.translate(points[i].x, points[i].y + trackerData.trackers[points[i].i].dy);
-					ctx.rotate(0.7853981633974483); // 45 deg
 					ctx.beginPath();
-					ctx.moveTo(0, 0);
-					ctx.lineTo(90, 0);
-					ctx.lineTo(90, 90);
-					ctx.lineTo(0, 90);
+					ctx.moveTo(0 , 0);
+					ctx.lineTo(200, 0);
+					ctx.lineTo(200, 100);
+					ctx.lineTo(0, 100);
 					ctx.closePath();
-					ctx.arc(45, 45, 20, 0, Math.PI * 2, true);
+					ctx.font = "bold 20px sans-serif";
+					// ctx.fillStyle = "rgba(255, 255, 255, 1)";
+					// ctx.textAlign = "center";
+					ctx.fillText("Foul!", 75, -10);
 					ctx.fill();
 					ctx.restore();
 				}
