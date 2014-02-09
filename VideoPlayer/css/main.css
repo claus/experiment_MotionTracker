@@ -17,8 +17,8 @@ body {
 #canvas, #video {
 	position: absolute;
 	top: 0;
-	width: 1072px;
-	height: 728px;
+	width: 1280px;
+	height: 720px;
 }
 #video {
 	left: -9999px;
